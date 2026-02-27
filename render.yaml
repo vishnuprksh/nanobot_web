@@ -2,7 +2,7 @@ services:
   - type: web
     name: nanobot-web
     env: docker
-    dockerfilePath: web/render.Dockerfile
+    dockerfilePath: render.Dockerfile
     dockerContext: .
     envVars:
       - key: NANOBOT_WEB_SECRET_KEY
