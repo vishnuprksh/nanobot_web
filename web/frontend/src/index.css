@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #334155;
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-dark-900/80 border border-dark-700/50 rounded-xl backdrop-blur-sm;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-nano-600/40 hover:shadow-lg hover:shadow-nano-900/20;
+  }
+  .btn-primary {
+    @apply bg-nano-600 hover:bg-nano-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-dark-800 hover:bg-dark-700 text-dark-200 font-medium px-4 py-2 rounded-lg border border-dark-600 transition-colors duration-150;
+  }
+  .btn-danger {
+    @apply bg-red-600/20 hover:bg-red-600/30 text-red-400 font-medium px-4 py-2 rounded-lg border border-red-600/30 transition-colors duration-150;
+  }
+  .input {
+    @apply bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-dark-100 placeholder-dark-400 focus:outline-none focus:border-nano-500 focus:ring-1 focus:ring-nano-500/30 transition-colors;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-success {
+    @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+  }
+  .badge-warning {
+    @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+  }
+  .badge-info {
+    @apply badge bg-nano-500/15 text-nano-400 border border-nano-500/20;
+  }
+  .badge-muted {
+    @apply badge bg-dark-700 text-dark-400 border border-dark-600;
+  }
+}
