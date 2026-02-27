@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import json
+import os
 from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import Depends, FastAPI, HTTPException, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from loguru import logger
 from pydantic import BaseModel
 
@@ -597,3 +600,20 @@ async def chat_websocket(ws: WebSocket):
 @app.get("/api/health")
 def health():
     return {"status": "ok", "version": "1.0.0"}
+
+
+# ── Static Files ─────────────────────────────────────────────────────────────
+
+
+# Serve static files from the 'static' folder (built React frontend)
+if os.path.exists("static"):
+    app.mount("/", StaticFiles(directory="static", html=True), name="static")
+
+
+@app.exception_handler(404)
+async def custom_404_handler(request, __):
+    if request.url.path.startswith("/api"):
+        return {"detail": "Not Found"}
+    if os.path.exists("static/index.html"):
+        return FileResponse("static/index.html")
+    return {"detail": "Not Found"}

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: nanobot-web
+    env: docker
+    dockerfilePath: web/render.Dockerfile
+    dockerContext: .
+    envVars:
+      - key: NANOBOT_WEB_SECRET_KEY
+        generateValue: true
+      - key: PORT
+        value: 8899
+      - key: NANOBOT_WEB_ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+    autoDeploy: true
+    # Use standard plan for persistent connections if needed, 
+    # but free tier is generally okay for testing.
+    plan: free
